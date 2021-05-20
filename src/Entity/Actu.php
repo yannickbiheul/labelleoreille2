@@ -32,6 +32,11 @@ class Actu
      */
     private $image;
 
+    /**
+     * @ORM\OneToOne(targetEntity=ImageActu::class, inversedBy="actu", cascade={"persist", "remove"})
+     */
+    private $imageActu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Actu
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImageActu(): ?ImageActu
+    {
+        return $this->imageActu;
+    }
+
+    public function setImageActu(?ImageActu $imageActu): self
+    {
+        $this->imageActu = $imageActu;
 
         return $this;
     }

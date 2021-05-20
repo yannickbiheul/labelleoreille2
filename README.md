@@ -41,3 +41,9 @@ npm install @popperjs/core
 ```bash
 php bin/phpunit --tesdox
 ```
+
+# Données
+## Charger les Fixtures
+```bash
+symfony console doctrine:fixtures:load
+```

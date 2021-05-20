@@ -22,6 +22,11 @@ class ImageActu
      */
     private $nom;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Actu::class, mappedBy="imageActu", cascade={"persist", "remove"})
+     */
+    private $actu;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,28 @@ class ImageActu
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getActu(): ?Actu
+    {
+        return $this->actu;
+    }
+
+    public function setActu(?Actu $actu): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($actu === null && $this->actu !== null) {
+            $this->actu->setImageActu(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($actu !== null && $actu->getImageActu() !== $this) {
+            $actu->setImageActu($this);
+        }
+
+        $this->actu = $actu;
 
         return $this;
     }

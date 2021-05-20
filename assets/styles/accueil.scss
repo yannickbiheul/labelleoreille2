@@ -22,10 +22,6 @@
     }
 }
 
-body {
-    background-color: #000;
-}
-
 @media screen and (max-width: 992px) {
     #banniere {
         height: 90vh;
@@ -43,6 +39,31 @@ body {
             top: 30%;
             left: 50%;
             transform: translateX(-50%);
+        }
+    }
+}
+
+#presentation {
+    padding-top: 100px;
+
+    .presentation1 {
+        // border: 1px solid #ccc;
+        width: 300px;
+        height: 300px;
+
+        img {
+            width: 300px;
+            border-radius: 50%;
+        }
+    }
+
+    .presentation2 {
+        border: 1px solid #ccc;
+        padding: 40px;
+        box-shadow: 4px 4px 4px #ccc;
+
+        hr {
+            width: 50%;
         }
     }
 }

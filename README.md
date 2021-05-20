@@ -31,3 +31,13 @@ symfony console doctrine:database:create
 symfony serve
 npm run dev-server
 ```
+## Problème avec @popperjs/core ?
+```bash
+npm install @popperjs/core
+```
+
+# Tests
+## Tests Unitaires
+```bash
+php bin/phpunit --tesdox
+```

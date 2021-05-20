@@ -2,6 +2,12 @@
 Site vitrine.
 
 # Installation
+## Pré-requis
+* PHP 7.2 minimum => [php.net](https://www.php.net/downloads)
+* Composer => [getComposer](https://getcomposer.org/download/)
+* Symfony CLI => [symfony](https://symfony.com/download)
+* MySQL
+
 ## Cloner le projet
 ```bash
 git clone https://github.com/yannickbiheul/labelleoreille2.git

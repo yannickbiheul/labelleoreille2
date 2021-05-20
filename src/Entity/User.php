@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -58,6 +60,22 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Actu::class, mappedBy="user")
+     */
+    private $actu;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Audio::class, mappedBy="user")
+     */
+    private $audio;
+
+    public function __construct()
+    {
+        $this->actu = new ArrayCollection();
+        $this->audio = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -196,6 +214,66 @@ class User implements UserInterface
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Actu[]
+     */
+    public function getActu(): Collection
+    {
+        return $this->actu;
+    }
+
+    public function addActu(Actu $actu): self
+    {
+        if (!$this->actu->contains($actu)) {
+            $this->actu[] = $actu;
+            $actu->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActu(Actu $actu): self
+    {
+        if ($this->actu->removeElement($actu)) {
+            // set the owning side to null (unless already changed)
+            if ($actu->getUser() === $this) {
+                $actu->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Audio[]
+     */
+    public function getAudio(): Collection
+    {
+        return $this->audio;
+    }
+
+    public function addAudio(Audio $audio): self
+    {
+        if (!$this->audio->contains($audio)) {
+            $this->audio[] = $audio;
+            $audio->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudio(Audio $audio): self
+    {
+        if ($this->audio->removeElement($audio)) {
+            // set the owning side to null (unless already changed)
+            if ($audio->getUser() === $this) {
+                $audio->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PrestationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,9 +45,20 @@ class Prestation
     private $contenu4;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity=Categorie::class, inversedBy="prestations")
+     */
+    private $categorie;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Audio::class, mappedBy="prestation")
      */
     private $audio;
+
+    public function __construct()
+    {
+        $this->categorie = new ArrayCollection();
+        $this->audio = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,14 +125,56 @@ class Prestation
         return $this;
     }
 
-    public function getAudio(): ?string
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->categorie;
+    }
+
+    public function addCategorie(Categorie $categorie): self
+    {
+        if (!$this->categorie->contains($categorie)) {
+            $this->categorie[] = $categorie;
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $categorie): self
+    {
+        $this->categorie->removeElement($categorie);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Audio[]
+     */
+    public function getAudio(): Collection
     {
         return $this->audio;
     }
 
-    public function setAudio(?string $audio): self
+    public function addAudio(Audio $audio): self
     {
-        $this->audio = $audio;
+        if (!$this->audio->contains($audio)) {
+            $this->audio[] = $audio;
+            $audio->setPrestation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudio(Audio $audio): self
+    {
+        if ($this->audio->removeElement($audio)) {
+            // set the owning side to null (unless already changed)
+            if ($audio->getPrestation() === $this) {
+                $audio->setPrestation(null);
+            }
+        }
 
         return $this;
     }

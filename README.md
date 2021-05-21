@@ -35,6 +35,14 @@ npm run dev-server
 ```bash
 npm install @popperjs/core
 ```
+## Créer les tables de la base de données
+```bash
+symfony console doctrine:migrations:migrate
+```
+## Ajouter les données
+```bash
+symfony console doctrine:fixtures:load
+```
 
 # Tests
 ## Tests Unitaires

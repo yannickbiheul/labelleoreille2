@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PrestationController!{% endblock %}
+{% block title %}La Belle Oreille | Prestations{% endblock %}
 
 {% block body %}
 <section id="prestations">
 <h1>Prestations</h1>
+<div class="row">
+{% for prestation in prestations %}
+<div class="col">
+<h2>{{ prestation.titre }}</h2>
+<p>{{ prestation.categorie }}</p>
+</div>
+{% endfor %}
+</div>
 </section>
 {% endblock %}

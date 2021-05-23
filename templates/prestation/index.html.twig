@@ -4,16 +4,7 @@
 
 {% block body %}
 <section id="prestations">
-    <h1>Prestations</h1>
-    <div class="row">
-        {% for prestation in prestations %}
-            <div class="carte-presentation col-lg-3">
-                <h2>{{ prestation.titre }}</h2>
-                {# <p>{{ prestation.categorie }}</p> #}
-                <p>{{ prestation.contenu1 }}</p>
-                <p>{{ prestation.contenu2 }}</p>
-            </div>
-        {% endfor %}
-    </div>
+    {% include 'prestation/bannierePrestations.html.twig' %}
+    {% include 'prestation/cartesPrestations.html.twig' %}
 </section>
 {% endblock %}

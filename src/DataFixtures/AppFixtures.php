@@ -73,6 +73,17 @@ class AppFixtures extends Fixture
 
         $manager->persist($prestation1);
 
+        $prestation2 = new Prestation;
+
+        $prestation2->setTitre("Recueil de souvenirs de vie")
+            ->setContenu1("Vous avez dans votre entourage ou votre cercle familial une personne qui vous est chère et dont vous voudriez conserver la voix et quelques souvenirs de vie en mémoire.
+            Je me propose de réaliser son interview avec ou sans vous.
+            Au cours du montage, j’intègre de courts extraits musicaux et ambiances sonores reflétant sa personnalité et sa vie.")
+            ->setContenu2("Un cadeau précieux que vous pourrez conserver toute votre vie: la voix de ceux que vous aimez.")
+            ->addCategorie($categorie1);
+
+        $manager->persist($prestation2);
+
 
         $manager->flush();
     }

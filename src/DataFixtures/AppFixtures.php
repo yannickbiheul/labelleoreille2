@@ -2,9 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categorie;
+use Faker\Factory;
 use App\Entity\User;
 use App\Entity\General;
+use App\Entity\Categorie;
 use App\Entity\Prestation;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -51,6 +52,23 @@ class AppFixtures extends Fixture
         $admin->setPassword($password);
 
         $manager->persist($admin);
+
+        // Utilisation de Faker
+        $faker = Factory::create('fr_FR');
+
+        // Création d'un utilisateur
+        $user = new User();
+
+        $user->setEmail('user@test.com')
+            ->setPrenom($faker->firstName())
+            ->setNom($faker->lastName())
+            ->setTelephone($faker->phoneNumber())
+            ->setRoles(['USER']);
+
+        $passwordUser = $this->encoder->encodePassword($user, 'password');
+        $user->setPassword($password);
+
+        $manager->persist($user);
 
         // CATEGORIES
         $categorie1 = new Categorie;
